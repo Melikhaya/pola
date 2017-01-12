@@ -1,0 +1,63 @@
+﻿@model WebApplication6.Models.EmailModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<body>
+    <div class="Mail-form">
+        <div class="row header">
+            <h1>Polilert &nbsp;</h1>
+            <h3>Fill out the form below to learn more!</h3>
+        </div>
+
+        <fieldset>
+
+            @using (Html.BeginForm("Index", "Response", System.Web.Mvc.FormMethod.Post, new { id = "formEnter", @class = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary()
+                @*<div>
+                        @Html.TextBoxFor(m => m.Geolocation, new { @id = "dataout", @class = "Geo-input" });
+                    </div>*@
+                <table>
+                    <tr>
+                        <td>@Html.RadioButtonFor(m => m.Urgancy, "Dont", new { id = "stateDont" }) @Html.Label("stateDont", "U")</td>
+                        <div class="clear"></div>
+                        <td>@Html.RadioButtonFor(m => m.Urgancy, "Maybe", new { id = "stateMaybe" }) @Html.Label("stateMaybe", "M")</td>
+                        <div class="clear"></div>
+                        <td>@Html.RadioButtonFor(m => m.Urgancy, "Reply", new { id = "stateReply" }) @Html.Label("stateReply", "R")</td>
+                    </tr>
+                </table>
+
+                <div class="clear"></div>
+                <ul>
+                    <li id="left">
+                        <p>From: </p>
+                        <p>@Html.TextBoxFor(m => m.From)</p>
+                    </li>
+                    <li>
+                        <p>Subject: </p>
+                        <p>@Html.TextBoxFor(m => m.Subject)</p>
+                    </li>
+                    <li>
+                        <p>Body: </p>
+                        <p>@Html.TextAreaFor(m => m.Body)</p>
+                    </li>
+                    <li>
+                        <p>Location: </p>
+                        <p>@Html.EditorFor(m => m.Location)</p>
+                    </li>
+
+                </ul>
+                <input class="submitform" type="submit" value="Send" onclick="geoFindMe()" />
+                @*@Html.HiddenFor(m => m.Geolocation, new { id = "dataout" })*@
+                <div type="hidden" id="dataout" name="dataout">
+                    </div">
+
+            }
+    </fieldset>
+</div>
+</body>
+
